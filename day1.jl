@@ -1,8 +1,8 @@
 import Base.Iterators:product
 
-function read_puzzle()
+function read_puzzle(filename)
 
-    open("day1/input.txt") do f
+    open(filename) do f
          return parse.(Int, readlines(f))
     end
 
@@ -24,6 +24,6 @@ function ex2( puzzle )
     end
 end
 
-puzzle = read_puzzle()
+puzzle = read_puzzle("input1.txt")
 println(ex1(puzzle))
 println(ex2(puzzle))

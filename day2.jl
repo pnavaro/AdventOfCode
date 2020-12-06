@@ -1,5 +1,3 @@
-import Base.Iterators:product
-
 struct Password
 
     cmin :: Int
@@ -9,10 +7,10 @@ struct Password
 
 end
 
-function read_passwords()
+function read_passwords(filename)
 
     passwords = Password[]
-    open("day2/input.txt") do f
+    open(filename) do f
          for line in eachline(f)
              data = split(line)
              cmin, cmax  = parse.(Int, split(data[1],"-"))
@@ -36,7 +34,6 @@ function check2(p)
     return ans
 end
 
-passwords = read_passwords()
-@show length(passwords)
+passwords = read_passwords("input2.txt")
 println(sum(check1.(passwords)))
 println(sum(check2.(passwords)))
