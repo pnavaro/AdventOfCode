@@ -6,7 +6,6 @@ def read_trees(filename):
 
 
 def hit_count(trees, down, right):
-    nrow = len(trees)
     hits = 0
     i, j = 0, 0
     while i < len(trees):
