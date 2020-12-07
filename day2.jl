@@ -35,5 +35,5 @@ function check2(p)
 end
 
 passwords = read_passwords("input2.txt")
-println(sum(check1.(passwords)))
-println(sum(check2.(passwords)))
+println(count(check1.(passwords)))
+println(count(check2.(passwords)))
