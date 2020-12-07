@@ -26,7 +26,6 @@ function read_passports(filename)
    passports = []
    open(filename) do f
      
-       newdict = true
        fields  = []
        for line in eachline(f)
 
