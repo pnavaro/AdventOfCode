@@ -64,17 +64,27 @@ const eye_colors = ["amb","blu","brn","gry","grn","hzl","oth"]
 
 function valid2( p ) # not finish...
 
-    valid_fields = collect(filter(k->(k!="cid"), keys(p)))
-   
-    if length(valid_fields) == 7
-        for fields in valid_fields
-            byr = parse(Int, p["byr"])
-            iyr = parse(Int, p["iyr"])
-            hgt = parse(Int, p["hgt"], base=16)
-            hcl = parse(Int, p["hcl"][2:end], base=16)
-            ecl = p["ecl"]
-            pid = parse(Int, p["pid"])
+    if valid1(p) 
+
+        1920 <= parse(Int, p["byr"]) <= 2002 || (return false)
+        2010 <= parse(Int, p["iyr"]) <= 2020 || (return false)
+        2020 <= parse(Int, p["eyr"]) <= 2030 || (return false)
+        hgt = p["hgt"]
+        if endswith(hgt, "cm") 
+            150 <= parse(Int,hgt[1:end-2]) <= 193 || (return false)
+        elseif endswith(hgt, "in") 
+            59 <= parse(Int,hgt[1:end-2]) <= 76 || (return false)
+        else
+            return false
         end
+        startswith(p["hcl"], "#") || (return false)
+        tryparse(Int, p["hcl"][2:end], base=16) == nothing && (return false)
+        p["ecl"] in eye_colors || (return false)
+        length(p["pid"]) == 9 || (return false)
+        tryparse(Int, p["pid"]) == nothing && (return false)
+
+        return true
+
     else
         return false
     end
@@ -82,4 +92,5 @@ function valid2( p ) # not finish...
 end
 
 passports = read_passports( "input4.txt")
-println(sum(valid1.(passports)))
+println(count(valid1.(passports)))
+println(count(valid2.(passports)))
