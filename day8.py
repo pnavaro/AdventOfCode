@@ -24,11 +24,36 @@ class BootCode:
         self.executed[self.index] = True
         self.index, self.value = actions[a]( self.index, self.value, int(p))
         if self.executed[self.index]:
-            raise StopIteration
+            raise StopIteration 
         return self.value
+
+    def positions(self):
+        return map( lambda y:y[0], 
+                    filter(lambda x:(x[1][0] in ["nop","jmp"]), 
+                    enumerate(self.instructions)))
+
+    def switch( self, position):
+
+        if self.instructions[position][0] == "nop":
+            self.instructions[position][0] = "jmp"
+        else:
+            self.instructions[position][0] = "nop"
+
+        
 
 
 code = BootCode("input8.txt")
-
 for value in code:
-    print(value)
+    pass
+
+print(f" Part 1 : {value}")
+
+for position in code.positions():
+
+    code = BootCode("input8.txt")
+    code.switch(position)
+    try:
+        for value in code:
+            pass
+    except IndexError:
+        print(f" Part 2 : {value}")
