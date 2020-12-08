@@ -5,9 +5,10 @@ def load_data(filename):
     with open(filename) as f:
         bags = dict()
         for line in f:
-            line = line.replace(',', '').replace('.', '').replace('bags','')
-            line = line.replace("bag", '').replace("no other", "")
-            line = line.strip()
+            bins = [',', '.', 'bags', 'bag', 'no other']
+            for b in bins:
+                line = line.replace(b, '')
+                line = line.strip()
             color, contain = line.split("contain")
             loads = []
             contain = contain.split()
