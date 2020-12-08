@@ -17,8 +17,6 @@ function load_data(filename)
                     push!(loads,string(c1," ",c2))
                 end
             end
-            println(color, loads)
-            @show typeof(strip(color))
             bags[strip(color)] = loads
         end
         return bags
@@ -28,16 +26,16 @@ end
 
 function hold_shiny_gold( color, bags )
 
-    if "shiny bag" in bags[color]
+    if "shiny gold" in bags[color]
        return true
     elseif length(bags[color]) > 0
        return any([hold_shiny_gold( c, bags ) for c in unique(bags[color])])
     else
-       false
+	return false
     end
 
 end
 
-bags = load_data("input_example.txt")
-println(bags)
+bags = load_data("input7.txt")
 println(count([hold_shiny_gold(c, bags) for c in keys(bags)]))
+
