@@ -1,5 +1,3 @@
-
-
 def load_data(filename):
 
     with open(filename) as f:
