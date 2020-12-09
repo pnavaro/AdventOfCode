@@ -37,15 +37,6 @@ def find_myseat( tickets) :
         if seat2 - seat1 > 1:
             return seat1+1
 
-for ticket in ["BFFFBBFRRR", "FFFBBBFRRR", "BBFFBBFRLL"]:
-    print( f"{ticket} : row {row(ticket)}, column {column(ticket)}, seat ID {seat_id(ticket)}.")
-
-print("""
-BFFFBBFRRR : row 70, column 7, seat ID 567.
-FFFBBBFRRR : row 14, column 7, seat ID 119.
-BBFFBBFRLL : row 102, column 4, seat ID 820.
-""")
-
 tickets = read_boarding_passes( "input5.txt")
 print(max(map(seat_id, tickets)))
 print(find_myseat( tickets))
