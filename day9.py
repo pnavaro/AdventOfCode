@@ -15,13 +15,11 @@ def check( numbers, item ):
 def part1(puzzle, preamble):
     numbers = load(puzzle)
     size = len(numbers)
-    previous_numbers = deque(numbers[:preamble])
-    
+    previous_numbers = numbers[:preamble]
     index = preamble
     while index < size:
         item = numbers[index]
-        previous_numbers.popleft()
-        previous_numbers.append(numbers[index])
+        previous_numbers = numbers[index-preamble:index]
         if not check(previous_numbers, item):
             return item
         else:
