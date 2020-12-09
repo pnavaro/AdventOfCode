@@ -1,44 +1,12 @@
-
 def read_boarding_passes( filename ):
 
     with open(filename) as f:
-        return list(map(str.strip, f.readlines()))
-
-
-def row( ticket ):
-
-    front, back = 0, 127
-    for c in ticket[:7]:
-        half = (back-front)//2+1
-        if c == 'F':
-           back  -= half
-        else:
-           front += half
-
-    return min(front,back)
-
-def column( ticket ):
-
-    left, right = 0, 7
-    for c in ticket[-3:]:
-        half = (right-left)//2+1
-        if c == 'L':
-           right -= half
-        else:
-           left += half
-
-    return max(left, right)
-
-seat_id = lambda ticket:  8 * row(ticket) + column(ticket) 
-
-def find_myseat( tickets) :
-    seats = sorted(list(map(seat_id, tickets )))
-    for seat1, seat2 in zip(seats[:-1], seats[1:]):
-        if seat2 - seat1 > 1:
-            return seat1+1
+        tickets = f.read()
+        table = str.maketrans(dict(zip("FBLR","0101")))
+        tickets = tickets.translate(table)
+        return tickets.split()
 
 tickets = read_boarding_passes( "input05.txt")
-print(max(map(seat_id, tickets)))
-print(find_myseat( tickets))
-
-
+seat_ids = list(map( lambda x: int(x, base=2), tickets))
+print(max(seat_ids))
+print(set(range(min(seat_ids),max(seat_ids))) - set(seat_ids))
