@@ -19,7 +19,7 @@ function hit_count(trees, down, right)
 end
 
 
-trees = read_trees("input3.txt")
+trees = read_trees("input03.txt")
 println(hit_count(trees, 1, 3))
 println(hit_count(trees, 1, 1) * 
         hit_count(trees, 1, 3) * 

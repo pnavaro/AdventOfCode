@@ -43,5 +43,5 @@ def part2(puzzle, preamble):
 
     return max(roll) + min(roll)
     
-print(part1("input9.txt", 25))
-print(part2("input9.txt", 25))
+print(part1("input09.txt", 25))
+print(part2("input09.txt", 25))

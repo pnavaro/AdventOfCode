@@ -91,6 +91,6 @@ def valid2( p ) :
         return False
 
 
-passports = read_passports( "input4.txt")
+passports = read_passports( "input04.txt")
 print(sum(map(valid1, passports)))
 print(sum(map(valid2, passports)))

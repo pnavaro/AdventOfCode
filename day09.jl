@@ -54,5 +54,5 @@ function part2(puzzle, preamble)
     return maximum(deque) + minimum(deque)
     
 end
-println(part1("input9.txt", 25))
-println(part2("input9.txt", 25))
+println(part1("input09.txt", 25))
+println(part2("input09.txt", 25))

@@ -34,6 +34,6 @@ function counts_2( answers )
 end
 
 
-answers = read_answers( "input6.txt" )
+answers = read_answers( "input06.txt" )
 println(counts_1( answers ))
 println(counts_2( answers ))

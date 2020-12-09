@@ -30,6 +30,6 @@ def counts_2( answers ):
     return res
 
 
-answers = read_answers( "input6.txt" )
+answers = read_answers( "input06.txt" )
 print(counts_1( answers ))
 print(counts_2( answers ))

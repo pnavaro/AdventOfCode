@@ -16,7 +16,7 @@ def hit_count(trees, down, right):
     return hits
 
 
-trees = read_trees("input3.txt")
+trees = read_trees("input03.txt")
 
 print(hit_count(trees, 1, 3))
 print(hit_count(trees, 1, 1) * 

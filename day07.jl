@@ -51,6 +51,6 @@ function contained_bags( color, bags, n)
 
 end
 
-bags = load_data("input7.txt")
+bags = load_data("input07.txt")
 println(count([hold_shiny_gold(c, bags) for c in keys(bags)]))
 println(contained_bags( "shiny gold", bags, 0))

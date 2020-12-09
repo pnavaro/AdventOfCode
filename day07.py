@@ -42,6 +42,6 @@ def contained_bags( color, bags, n):
            s += contained_bags(c, bags, n)
         return s
 
-bags = load_data("input7.txt")
+bags = load_data("input07.txt")
 print(sum([hold_shiny_gold(c, bags) for c in bags.keys()]))
 print(contained_bags( "shiny gold", bags, 0))

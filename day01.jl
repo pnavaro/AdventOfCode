@@ -24,6 +24,6 @@ function ex2( puzzle )
     end
 end
 
-puzzle = read_puzzle("input1.txt")
+puzzle = read_puzzle("input01.txt")
 println(ex1(puzzle))
 println(ex2(puzzle))

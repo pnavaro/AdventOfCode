@@ -21,6 +21,6 @@ def check1(p):
 def check2(p):
      return (p.pawd[p.cmin-1] == p.char) ^ (p.pawd[p.cmax-1] == p.char)
 
-passwords = read_passwords("input2.txt")
+passwords = read_passwords("input02.txt")
 print(sum(map(check1, passwords)))
 print(sum(map(check2, passwords)))

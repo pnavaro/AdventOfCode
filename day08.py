@@ -42,7 +42,7 @@ class BootCode:
         
 
 
-code = BootCode("input8.txt")
+code = BootCode("input08.txt")
 for value in code:
     pass
 
@@ -50,7 +50,7 @@ print(f" Part 1 : {value}")
 
 for position in code.positions():
 
-    code = BootCode("input8.txt")
+    code = BootCode("input08.txt")
     code.switch(position)
     try:
         for value in code:

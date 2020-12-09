@@ -37,7 +37,7 @@ def find_myseat( tickets) :
         if seat2 - seat1 > 1:
             return seat1+1
 
-tickets = read_boarding_passes( "input5.txt")
+tickets = read_boarding_passes( "input05.txt")
 print(max(map(seat_id, tickets)))
 print(find_myseat( tickets))
 

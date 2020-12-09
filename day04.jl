@@ -90,6 +90,6 @@ function valid2( p ) # not finish...
 
 end
 
-passports = read_passports( "input4.txt")
+passports = read_passports( "input04.txt")
 println(count(valid1.(passports)))
 println(count(valid2.(passports)))

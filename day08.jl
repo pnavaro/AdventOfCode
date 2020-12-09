@@ -49,7 +49,7 @@ function switch( instructions, position )
 
 end
 
-instructions = bootcode("input8.txt")
+instructions = bootcode("input08.txt")
 
 println(" Part 1 : ", first(run_code( instructions)))
 positions = findall( a -> ( a[1] in ["jmp","nop"]), instructions)

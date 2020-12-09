@@ -15,6 +15,6 @@ def ex2( puzzle ):
         if sum(item) == 2020: 
             return prod(item)
 
-puzzle = read_puzzle("input1.txt")
+puzzle = read_puzzle("input01.txt")
 print(ex1(puzzle))
 print(ex2(puzzle))

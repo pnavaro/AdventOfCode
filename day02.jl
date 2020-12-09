@@ -34,6 +34,6 @@ function check2(p)
     return ans
 end
 
-passwords = read_passwords("input2.txt")
+passwords = read_passwords("input02.txt")
 println(count(check1.(passwords)))
 println(count(check2.(passwords)))

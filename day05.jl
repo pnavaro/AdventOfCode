@@ -46,11 +46,8 @@ function seat_position( seat_id )
 
 end
 
-tickets = read_boarding_passes( "input5.txt")
+tickets = read_boarding_passes( "input05.txt")
 println(maximum(seat_id.(tickets)))
 seats = sort(seat_id.(tickets))
 position = findfirst(seats[2:end] .- seats[1:end-1] .== 2)
 println(seats[position]+1)
-
-
-
