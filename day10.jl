@@ -23,7 +23,7 @@ function part1( puzzle )
     end
 end
 
-function part2( puzzle )
+function part2( puzzle ) # brute force does not work
 
     function count_path( current_adapter, adapters)
         
@@ -54,14 +54,32 @@ function count_arrangements(puzzle)
 
     n = length(adapt)
 
-    edges = 0
-    for i in 1:n 
-        for j in  1:i
-            edges += count( 0 < adapt[i] - adapt[j] <= 3)
+    dp = Array{Int, 2}[]
+    current_adapter = builtin_joltage(puzzle)
+
+    push!(dp,zeros(Int,n,n))
+    while current_adapter > 0
+        for i in 1:n , j in  1:i
+            dp[i,j][1] = 0
+            if  e = 0 && i == j
+                dp[i,j][1] = 1
+            end
+            if  e = 1 && 0 < adapt[i]-adapt[j] <= 3
+                dp[i,j][1] = 1
+            end
+
+            if e > 1
+                for b in 1:n
+                    if 0 < adapt[i]-adapt[b] <= 3
+                        dp[i,j][e] += dp[b,j][e - 1]
+                    end
+                end
+            end 
+
         end
     end
   
-    return edges
+    return sum(dp[1,end])
   
 end
 
