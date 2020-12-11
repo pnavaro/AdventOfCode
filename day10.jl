@@ -7,14 +7,14 @@ function load( filename )
 end
 
 function part1( puzzle )
-    test = vcat(0, puzzle..., builtin_joltage( puzzle ) )
-    sort!(test)
+    adapt = vcat(0, puzzle..., builtin_joltage( puzzle ) )
+    sort!(adapt)
     differences = []
     adapter = 0
-    for x in  enumerate(test)
-         possibles = 0 .< test .- adapter .<= 3
+    for x in adapt
+         possibles = 0 .< adapt .- adapter .<= 3
          if any(possibles)
-             new_adapter = test[findfirst(possibles)]
+             new_adapter = adapt[findfirst(possibles)]
              push!(differences, new_adapter - adapter )
              adapter = new_adapter
          else
@@ -23,7 +23,7 @@ function part1( puzzle )
     end
 end
 
-function part2( puzzle ) # brute force does not work
+function part2( puzzle ) # brute force is too exepensive
 
     function count_path( current_adapter, adapters)
         
@@ -47,46 +47,51 @@ function part2( puzzle ) # brute force does not work
 
 end
 
+# I found the solution with the help of this reference
+# https://www.geeksforgeeks.org/count-possible-paths-source-destination-exactly-k-edges/
 
 function count_arrangements(puzzle)
 
-    adapt = vcat(0, puzzle...)
+    adapt = vcat(0, puzzle..., builtin_joltage(puzzle))
 
     n = length(adapt)
 
-    dp = Array{Int, 2}[]
-    current_adapter = builtin_joltage(puzzle)
+    graph = zeros(Bool,n, n)
+    for i in 1:n, j in 1:n
+        graph[i,j] = (0 < adapt[j] - adapt[i] <= 3)
+    end
 
-    push!(dp,zeros(Int,n,n))
-    while current_adapter > 0
-        for i in 1:n , j in  1:i
-            dp[i,j][1] = 0
-            if  e = 0 && i == j
-                dp[i,j][1] = 1
-            end
-            if  e = 1 && 0 < adapt[i]-adapt[j] <= 3
-                dp[i,j][1] = 1
-            end
+    count =  zeros(Int,n,n,n)
+ 
+    e = 1
+    while e <= n && adapt[e] < builtin_joltage(adapt)
 
-            if e > 1
-                for b in 1:n
-                    if 0 < adapt[i]-adapt[b] <= 3
-                        dp[i,j][e] += dp[b,j][e - 1]
+        for i in 1:n, j in 1:n
+                 
+            if (e == 1 && i == j)
+                count[i,j,e] = 1
+            end
+            if (e == 2 && graph[i,j])
+                count[i,j,e] = 1
+            end
+ 
+            if e > 2
+                for k in 1:n
+                    if graph[i,k]
+                        count[i,j,e] += count[k,j,e-1]
                     end
                 end
-            end 
-
+            end
         end
-    end
-  
-    return sum(dp[1,end])
+        e = e+1
+ 
+    end 
+ 
+    return sum(count[1,n,:])
   
 end
 
 puzzle = load("input10.txt")
 println(prod(part1(puzzle)))
-
-test1 = [16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4]
-println(count_arrangements(test1))
-puzzle = load("input_example.txt")
+puzzle = load("input10.txt")
 println(count_arrangements(puzzle))
