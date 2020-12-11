@@ -50,7 +50,7 @@ function plot( seats )
      println()
 end
 
-function round!( seats )
+function round1!( seats )
 
     m, n = size(seats)
     old = copy(seats)
@@ -68,11 +68,71 @@ function round!( seats )
     state
 end
 
+function get_seat( seats, row, col) 
+
+    for (i,j) in zip(row, col)
+        seats[i,j] == 1 && return false
+        seats[i,j] == 2 && return true
+    end
+    return false
+end
+
+function get_seat(seats)
+    for s in seats
+        s == 1 && return false
+        s == 2 && return true
+    end
+    false
+end
+
+function visible_seats( k, l, seats)
+
+   m,n = size(seats)
+
+   res = [
+   get_seat(seats[k-1:-1:1,l]),
+   get_seat(seats[k+1:1:m,l]), 
+   get_seat(seats[k,l-1:-1:1]), 
+   get_seat(seats[k,l+1:n]), 
+   get_seat(seats, k-1:-1:1+k-min(k,l), l-1:-1:1+l-min(k,l)), 
+   get_seat(seats, k-1:-1:k-min(k-1,n-l), l+1:1:l+min(k-1,n-l)), 
+   get_seat(seats, k+1:1:min(m-k,n-l)+k, l+1:1:min(m-k,n-l)+l), 
+   get_seat(seats, k+1:1:k+min(m-k,l-1), l-1:-1:l-min(m-k,l-1))]
+
+   res
+end
+
+function round2!( seats )
+
+    m, n = size(seats)
+    old = copy(seats)
+    state = true
+    for i in 2:m-1, j in 2:n-1
+        if old[i,j] == 1 && all(.!(visible_seats(i,j, old)))
+            seats[i,j] = 2
+            state = false
+        end
+        if old[i,j] == 2 && count(visible_seats(i,j, old)) >= 5
+            seats[i,j] = 1
+            state = false
+        end
+    end
+    state
+end
+
+   
 seats = load("input11.txt")
 while true
-   if round!( seats)
+   if round1!( seats)
        println(count(seats .== 2))
        break
   end
 end
 
+seats = load("input11.txt")
+while true
+   if round2!( seats)
+       println(count(seats .== 2))
+       break
+  end
+end
