@@ -1,9 +1,7 @@
 function load(filename)
 
     open(filename) do f
-
         return [(x[1],parse(Int,join(x[2:end]))) for x in collect.(readlines(f))]
-
     end
 
 end
@@ -43,6 +41,9 @@ end
 
 manhattan_distance( ship ) = abs(ship.x) + abs(ship.y)
 
+rotate(x, y, θ) = round.(Int, (x * cos(θ*π/180) - y * sin(θ*π/180),
+                               x * sin(θ*π/180) + y * cos(θ*π/180)))
+
 function move!( ship, cmd, waipoint )
 
     d, l = cmd
@@ -57,11 +58,9 @@ function move!( ship, cmd, waipoint )
     elseif d == 'W'
        x -= l
     elseif d == 'L'
-       x, y = ( round(Int, x * cos(l*π/180) - y * sin(l*π/180)),
-                round(Int, x * sin(l*π/180) + y * cos(l*π/180)))
+       x, y = rotate( x, y, l)
     elseif d == 'R'
-       x, y = (round(Int, x * cos(-l*π/180) - y * sin(-l*π/180)),
-               round(Int, x * sin(-l*π/180) + y * cos(-l*π/180)))
+       x, y = rotate(x, y, -l)
     elseif d == 'F'
        ship.x += l * x
        ship.y += l * y
