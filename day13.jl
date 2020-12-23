@@ -18,19 +18,21 @@ function part1()
        
 end
 
+check( timestamp, departs ) = all( [ (timestamp+t) % bus_id == 0 for (bus_id,t) in departs])
+
 function part2()
 
     line1, line2 = readlines("input_example.txt")
     timestamp = parse(Int, line1)
     bus_ids = split(line2,",")
     
+    res = Tuple{Int,Int}[]
     for (minute,bus_id) in enumerate(bus_ids)
-
         if !occursin( "x", bus_id) 
-            println(" $bus_id  departs $(minute-1) after t ")
+            push!(res, (parse(Int,bus_id),minute-1))
         end
-    
     end
+    return res
 
 end
 
