@@ -20,11 +20,9 @@ end
 
 check( timestamp, departs ) = all( [ (timestamp+t) % bus_id == 0 for (bus_id,t) in departs])
 
-function part2()
+function part2(departs)
 
-    line1, line2 = readlines("input_example.txt")
-    timestamp = parse(Int, line1)
-    bus_ids = split(line2,",")
+    bus_ids = split(departs,",")
     
     res = Tuple{Int,Int}[]
     for (minute,bus_id) in enumerate(bus_ids)
@@ -32,10 +30,23 @@ function part2()
             push!(res, (parse(Int,bus_id),minute-1))
         end
     end
-    return res
+
+    timestamp = 0
+    while !check(timestamp, res)
+        timestamp += 1
+    end
+
+    println(timestamp)
+    return timestamp
 
 end
 
 
 println(part1())
-println(part2())
+_, departs = readlines("input_example.txt")
+@assert part2(departs) == 1068781
+@assert part2("17,x,13,19") == 3417
+@assert part2("67,7,59,61") == 754018
+@assert part2("67,x,7,59,61") == 779210
+@assert part2("67,7,x,59,61") == 1261476
+@assert part2("1789,37,47,1889") == 1202161486
