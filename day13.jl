@@ -28,6 +28,9 @@ function check( timestamp, departs )
    return true
 end
 
+# Three days to find the solution
+# This page helps me https://www.geeksforgeeks.org/chinese-remainder-theorem-set-1-introduction/
+
 function part2(departs)
 
     bus_ids = split(departs,",")
