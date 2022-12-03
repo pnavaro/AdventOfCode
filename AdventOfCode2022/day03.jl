@@ -1,12 +1,5 @@
-function priority(c)
 
-    if islowercase(c)
-        return c - 'a' + 1
-    else
-        return c - 'A' + 27
-    end
-end
-
+priority(c) = islowercase(c) ?  c - 'a' + 1 : c - 'A' + 27
 
 function ex1(filename)
 
