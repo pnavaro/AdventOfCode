@@ -28,13 +28,9 @@ end
 function strategy2( p1, p2 )
 
     offset = first(p1) - 'A'
-    if p2 == "X" # lose
-        play = 'X' + mod(offset+2,3)
-    elseif p2 == "Y" # draw
-        play = 'X' + mod(offset,3)
-    else # win
-        play = 'X' + mod(offset+1,3)
-    end
+    shift = mod(first(p2) - 'X' + 2, 3)
+    play = 'X' + mod(offset+shift,3)
+
     return strategy1(p1, string(play))
 
 end
