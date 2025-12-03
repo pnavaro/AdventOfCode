@@ -50,20 +50,16 @@ function password2(inputs)
     
         d, clicks = move[1] , parse(Int, move[2:end])
 
-        delta = d == 'L' ?  -clicks : clicks
+        for i in 1:clicks
+            if d == 'L'
+                position = mod(position-1, 100)
+            else
+                position = mod(position+1, 100)
+            end
 
-        fullrot = abs(delta) ÷ 100
-        k += fullrot
+            k += position==0
 
-        delta -=  sign(delta) * fullrot * 100
-
-        if delta < 0 && position != 0 && (position + delta) <= 0
-            k += 1
-        elseif delta > 0 && (position + delta) >= 100
-            k += 1
         end
-
-        position = mod(position + delta, 100)
     end
 
     return k
