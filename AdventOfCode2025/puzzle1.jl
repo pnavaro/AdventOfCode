@@ -57,7 +57,7 @@ function password2(inputs)
                 position = mod(position+1, 100)
             end
 
-            k += position==0
+            k += position == 0
 
         end
     end
