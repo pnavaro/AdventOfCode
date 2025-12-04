@@ -2,30 +2,31 @@ function part1()
 
     line1, line2 = readlines("input13.txt")
     timestamp = parse(Int, line1)
-    bus_ids = parse.(Int, filter( x-> !occursin("x",x), split(line2,",")))
-    
+    bus_ids = parse.(Int, filter(x -> !occursin("x", x), split(line2, ",")))
+
     flag = true
     wait = 0
-    
+
     while flag
         for bus_id in bus_ids
-            if (timestamp+wait) % bus_id == 0
+            if (timestamp + wait) % bus_id == 0
                 return wait * bus_id
             end
         end
         wait += 1
     end
-       
+
+    return
 end
 
-function check( timestamp, departs ) 
+function check(timestamp, departs)
 
-   for (bus_id,t) in departs
-      if (timestamp+t) % bus_id !== 0
-         return false
-      end
-   end
-   return true
+    for (bus_id, t) in departs
+        if (timestamp + t) % bus_id !== 0
+            return false
+        end
+    end
+    return true
 end
 
 # Three days to find the solution
@@ -33,12 +34,12 @@ end
 
 function part2(departs)
 
-    bus_ids = split(departs,",")
-    
-    departs = Tuple{Int,Int}[]
-    for (minute,bus_id) in enumerate(bus_ids)
-        if !occursin( "x", bus_id) 
-            push!(departs, (parse(Int,bus_id),minute-1))
+    bus_ids = split(departs, ",")
+
+    departs = Tuple{Int, Int}[]
+    for (minute, bus_id) in enumerate(bus_ids)
+        if !occursin("x", bus_id)
+            push!(departs, (parse(Int, bus_id), minute - 1))
         end
     end
 

@@ -6,12 +6,12 @@ function joltage1(bank)
     i = maximum(s)
     ii = findfirst(==(i), s)
     if ii == length(s)
-        i, j = maximum(s[begin:(end-1)]), i
+        i, j = maximum(s[begin:(end - 1)]), i
     else
-        j = maximum(s[(ii+1):end])
+        j = maximum(s[(ii + 1):end])
     end
 
-    return 10i+j
+    return 10i + j
 
 end
 
@@ -20,16 +20,16 @@ function joltage2(bank)
 
     res = Int[]
     s = parse.(Int, split(bank, ""))
-    for size = 11:-1:0
+    for size in 11:-1:0
         n = length(s)
         if n + length(res) == 12
             push!(res, s...)
             break
         else
-            number = maximum(s[begin:(end-size)])
+            number = maximum(s[begin:(end - size)])
             i = findfirst(==(number), s)
             push!(res, number)
-            s = s[(i+1):end]
+            s = s[(i + 1):end]
         end
     end
 

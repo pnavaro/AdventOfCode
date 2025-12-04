@@ -1,4 +1,4 @@
-import Base.Iterators:product
+import Base.Iterators: product
 
 
 filename = "input01.txt"
@@ -9,7 +9,7 @@ function ex1()
     calories_max = 0
 
     open(filename) do f
-    
+
         for line in readlines(f)
             if length(line) == 0
                 calories_max = max(calories_max, calories)
@@ -30,7 +30,7 @@ function podium!(calories_max, calories)
         push!(calories_max, calories)
         sort!(calories_max, rev = true)
     end
-    println(calories_max)
+    return println(calories_max)
 end
 
 function ex2()
@@ -39,7 +39,7 @@ function ex2()
     calories_max = zeros(Int, 3)
 
     open(filename) do f
-    
+
         for line in readlines(f)
             if length(line) == 0
                 podium!(calories_max, calories)

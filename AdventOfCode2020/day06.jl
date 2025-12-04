@@ -1,4 +1,4 @@
-function read_answers( filename )
+function read_answers(filename)
 
     answers = Vector{String}[]
     open(filename) do f
@@ -17,14 +17,14 @@ function read_answers( filename )
 
 end
 
-function counts_1( answers )
+function counts_1(answers)
 
     return sum(length.(unique.(join.(answers))))
 
 end
 
-function counts_2( answers )
- 
+function counts_2(answers)
+
     res = 0
     for group in answers, c in 'a':'z'
         res += all([ c in ans for ans in group])
@@ -34,6 +34,6 @@ function counts_2( answers )
 end
 
 
-answers = read_answers( "input06.txt" )
-println(counts_1( answers ))
-println(counts_2( answers ))
+answers = read_answers("input06.txt")
+println(counts_1(answers))
+println(counts_2(answers))

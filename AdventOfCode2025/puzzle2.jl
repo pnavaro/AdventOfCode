@@ -5,7 +5,7 @@ function invalid1(id)
     s = string(id)
     n = length(s)
     if n % 2 == 0
-        return s[1:(n÷2)] == s[(n÷2+1):end]
+        return s[1:(n ÷ 2)] == s[(n ÷ 2 + 1):end]
     else
         return false
     end
@@ -14,7 +14,7 @@ end
 function invalid2(id)
     s = string(id)
     n = length(s)
-    for i = 1:(n÷2)
+    for i in 1:(n ÷ 2)
         if length(unique(Iterators.partition(s, i))) == 1
             return true
         end

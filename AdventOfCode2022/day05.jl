@@ -3,9 +3,9 @@ input = joinpath(@__DIR__, "input05.txt")
 
 function read_data(filename)
 
-    open(filename) do f
+    return open(filename) do f
 
-       return readlines(f)
+        return readlines(f)
 
     end
 
