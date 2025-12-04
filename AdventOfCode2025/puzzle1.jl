@@ -7,8 +7,8 @@ function password1(inputs)
     position = 50
     k = 0
     for move in inputs
-    
-        d, clicks = move[1] , parse(Int, move[2:end])
+
+        d, clicks = move[1], parse(Int, move[2:end])
         if d == 'L'
             position -= clicks
         else
@@ -45,12 +45,12 @@ function password2(inputs)
     position = 50
 
     k = 0
-    
-    for move in inputs
-    
-        d, clicks = move[1] , parse(Int, move[2:end])
 
-        for i in 1:clicks
+    for move in inputs
+
+        d, clicks = move[1], parse(Int, move[2:end])
+
+        for i = 1:clicks
             if d == 'L'
                 position = mod(position-1, 100)
             else
